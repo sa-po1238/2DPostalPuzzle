@@ -19,7 +19,7 @@ public class SortingBox : MonoBehaviour //, IDropHandler
     }
     */
 
-    public string GetValidAddress()
+    public string GetValidAddress() // 受け入れる住所を取得
     {
         return validAddress;
     }
