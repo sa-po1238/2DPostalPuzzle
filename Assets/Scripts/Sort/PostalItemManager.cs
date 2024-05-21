@@ -8,6 +8,19 @@ public class PostalItemManager : MonoBehaviour
     public GameObject postalItemPrefab;
     public Transform spawnPoint;
 
+    private string[] cityNames = new string[]
+    {
+        "Persimmon Ctr",
+        "Plum St",
+        "Watermelon St",
+        "Papaya Bl"
+    };
+
+    public void Start()
+    {
+        SpawnPostalItem();
+    }
+
     public void SpawnPostalItem()
     {
         postalItemCount--;  // PostalItemの残り数を減らす
@@ -20,6 +33,7 @@ public class PostalItemManager : MonoBehaviour
         PostalItem postalItem = newPostalItem.GetComponent<PostalItem>();   // PostalItemコンポーネントを取得
 
         string address = GetRandomAddress();
+        Debug.Log("Address: " + address);
         postalItem.address = address;   // 住所を設定
     }
 
@@ -27,12 +41,11 @@ public class PostalItemManager : MonoBehaviour
     // アドレス作成
     private string GetRandomAddress()
     {
-        string[] addresses = new string[]
-        {
-            "123 Main St.",
-            "456 Elm St.",
-            "789 Oak St."
-        };
-        return addresses[Random.Range(0, addresses.Length)];
+        int addressNum = Random.Range(0, 1000);
+        int randomNum = Random.Range(0, cityNames.Length);
+        string cityName = cityNames[randomNum];
+        
+        string address = addressNum + " " + cityName;
+        return address;
     }
 }

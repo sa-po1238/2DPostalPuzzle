@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using TMPro;
 
 public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
 {
@@ -10,6 +12,8 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
     private CanvasGroup canvasGroup;    // PostalItemのCanvasGroup
 
     private SortingPoint sortingPoint;
+
+    public TextMeshProUGUI addressText;
 
     private void Awake()
     {
@@ -22,6 +26,9 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         // PostalItemを生成したときにCanvasの子要素にする
         transform.SetParent(GameObject.Find("Canvas").transform, false);
+
+        // PostalItemの住所を表示
+        addressText.text = address;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -39,10 +46,12 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
         }
     }
 
+    /*
     public string GetAddress()
     {
         return address;
     }
+    */
 
     
     private bool IsDroppedInValidBox()
@@ -55,28 +64,25 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
         };
         EventSystem.current.RaycastAll(pointerEventData, results);  // ドロップ位置のオブジェクトをすべて取得
 
-        /* PostalItemがドロップされた位置にあるオブジェクトがSortingBoxであるかチェック */
+        // PostalItemがドロップされた位置にあるオブジェクトがSortingBoxであるかチェック
         foreach (RaycastResult result in results)
         {
-            if (result.gameObject.GetComponent<SortingBox>() != null)   // SortingBoxの場合
+            SortingBox sortingBox = result.gameObject.GetComponent<SortingBox>();
+            if (sortingBox != null) // SortingBoxの場合
             {
-                SortingBox sortingBox = result.gameObject.GetComponent<SortingBox>();
-                if (sortingBox.GetValidAddress() == address) // SortingBoxの住所とPostalItemの住所が一致する場合
+                if (address.Contains(sortingBox.GetValidAddress())) // SortingBoxの住所とPostalItemの住所が部分一致する場合
                 {
-                    sortingPoint.AddScore(1);   // スコアを加算
+                    sortingPoint.AddScore(1); // スコアを加算
                 }
                 else
                 {
-                    sortingPoint.AddMiss(1);    // ミス回数を加算
+                    sortingPoint.AddMiss(1); // ミス回数を加算
                 }
                 Destroy(this.gameObject);
-                return true;    // PostalItemがドロップされた位置にSortingBoxがある場合
-            }
-            else    // SortingBoxでない場合
-            {
-                return false;   // PostalItemがドロップされた位置にSortingBoxがない場合
+                return true; // PostalItemがドロップされた位置にSortingBoxがある場合
             }
         }
-        return false;   // PostalItemがドロップされた位置にオブジェクトがない場合
+        return false; // PostalItemがドロップされた位置にSortingBoxがない場合
     }
+    
 }
