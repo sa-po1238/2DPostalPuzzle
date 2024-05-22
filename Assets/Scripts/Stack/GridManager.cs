@@ -6,7 +6,7 @@ public class GridManager : MonoBehaviour
 {
     public int rows = 10;
     public int columns = 10;
-    public float cellSize = 500.0f;
+    public float cellSize = 1.0f;
     public GameObject cellPrefab;
 
     private Cell[,] grid;
