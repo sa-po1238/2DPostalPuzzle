@@ -40,7 +40,7 @@ public class StackItem : MonoBehaviour, IDragHandler, IEndDragHandler
 
         foreach (RaycastResult result in results)
         {
-            if (result.gameObject.CompareTag("LoadArea")) 
+            if (result.gameObject.CompareTag("StackArea")) 
             {
                 return true;    
             }
