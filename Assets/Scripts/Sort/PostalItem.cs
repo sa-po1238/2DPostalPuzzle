@@ -9,7 +9,7 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     public string address; // 住所
     private Vector3 initialPosition;    // PostalItemの初期位置
-    private CanvasGroup canvasGroup;    // PostalItemのCanvasGroup
+    private SpriteRenderer spriteRenderer;    // PostalItemのSpriteRenderer
 
     private SortingPoint sortingPoint;
 
@@ -18,56 +18,40 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
     private void Awake()
     {
         initialPosition = transform.position;   // PostalItemの初期位置を記憶
-        canvasGroup = GetComponent<CanvasGroup>();  // PostalItemのCanvasGroupを取得
         sortingPoint = FindObjectOfType<SortingPoint>();    // SortingPointを取得
+        spriteRenderer = GetComponent<SpriteRenderer>();   // PostalItemのSpriteRendererを取得
     }
 
     void Start()
     {
-        // PostalItemを生成したときにCanvasの子要素にする
-        transform.SetParent(GameObject.Find("Canvas").transform, false);
-
         // PostalItemの住所を表示
         addressText.text = address;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = Input.mousePosition;   // PostalItemをマウスカーソルに追従
-        canvasGroup.blocksRaycasts = false; // ドラッグ中はレイキャストを無効化
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);    // マウスカーソルの位置を取得
+        transform.position = new Vector3(mousePosition.x, mousePosition.y, initialPosition.z);   // PostalItemをマウスカーソルに追従
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        canvasGroup.blocksRaycasts = true;  // ドラッグ終了時にレイキャストを有効化
         if (IsDroppedInValidBox() == false) // ドロップ先の箱が正しくない場合
         {
             transform.position = initialPosition;   // PostalItemを初期位置に戻す
         }
     }
 
-    /*
-    public string GetAddress()
-    {
-        return address;
-    }
-    */
-
-    
+    /* PostalItemがドロップされた位置にSortingBoxがあるかチェック */  
     private bool IsDroppedInValidBox()
     {
-        /* PostalItemがドロップされた位置にあるオブジェクトを取得 */
-        List<RaycastResult> results = new List<RaycastResult>();    // ドロップ位置のオブジェクトを格納するリスト
-        PointerEventData pointerEventData = new PointerEventData(EventSystem.current)   // ドロップ位置のイベントデータ
-        {
-            position = Input.mousePosition  // ドロップ位置をマウスカーソルの位置に設定
-        };
-        EventSystem.current.RaycastAll(pointerEventData, results);  // ドロップ位置のオブジェクトをすべて取得
+        // PostalItemがドロップされた位置にあるオブジェクトを取得
+        Collider2D[] colliders = Physics2D.OverlapPointAll(transform.position);
 
         // PostalItemがドロップされた位置にあるオブジェクトがSortingBoxであるかチェック
-        foreach (RaycastResult result in results)
+        foreach (Collider2D collider in colliders)
         {
-            SortingBox sortingBox = result.gameObject.GetComponent<SortingBox>();
+            SortingBox sortingBox = collider.GetComponent<SortingBox>();
             if (sortingBox != null) // SortingBoxの場合
             {
                 if (address.Contains(sortingBox.GetValidAddress())) // SortingBoxの住所とPostalItemの住所が部分一致する場合

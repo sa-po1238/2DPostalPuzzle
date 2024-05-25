@@ -38,7 +38,7 @@ public class PostalItemManager : MonoBehaviour
     }
 
 
-    // アドレス作成
+    /* アドレス作成 */
     private string GetRandomAddress()
     {
         int addressNum = Random.Range(0, 1000);
