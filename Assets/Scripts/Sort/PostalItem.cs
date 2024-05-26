@@ -36,10 +36,33 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (IsDroppedEnlargementSpace() == true)
+        {
+            transform.localScale = new Vector3(2, 2, 1); // PostalItemを拡大
+        }
         if (IsDroppedInValidBox() == false) // ドロップ先の箱が正しくない場合
         {
             transform.position = initialPosition;   // PostalItemを初期位置に戻す
         }
+    }
+
+    private bool IsDroppedEnlargementSpace()
+    {
+        // PostalItemがドロップされた位置にあるオブジェクトを取得
+        Collider2D[] colliders = Physics2D.OverlapPointAll(transform.position);
+
+        // PostalItemがドロップされた位置にあるオブジェクトがSortingBoxであるかチェック
+        foreach (Collider2D collider in colliders)
+        {
+            Debug.Log("PostalItem is dropped in " + collider.tag);
+            // タグがEnlargementSpaceのオブジェクトがある場合
+            if (collider.tag == "EnlargementSpace")
+            {
+                Debug.Log("PostalItem is dropped in EnlargementSpace");
+                return true; // PostalItemがドロップされた位置にEnlargementSpaceがある場合
+            }
+        }
+        return false; // PostalItemがドロップされた位置にSortingBoxがない場合
     }
 
     /* PostalItemがドロップされた位置にSortingBoxがあるかチェック */  
