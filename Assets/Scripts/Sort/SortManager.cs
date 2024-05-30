@@ -15,7 +15,7 @@ public class SortManager : MonoBehaviour
     {
         Time.timeScale = 0f;    // 停止
 
-        GetComponent<Text>().text = "0";
+        GetComponent<TextMeshProUGUI>().text = "0.00";
     }
 
     // Update is called once per frame

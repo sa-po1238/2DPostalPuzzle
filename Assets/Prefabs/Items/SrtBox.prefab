@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 632e37d000d834b4192602f86a7a44e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  validAddress: Papaya
+  validAddress: Persimmon
   sortingBoxNameText: {fileID: 3496878480279012175}
 --- !u!61 &99596514590656205
 BoxCollider2D:
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 5944340680677896450}
   - component: {fileID: 3496878480279012175}
   m_Layer: 5
-  m_Name: SrtBoxName_Papaya
+  m_Name: SrtBoxName_Persimmon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
