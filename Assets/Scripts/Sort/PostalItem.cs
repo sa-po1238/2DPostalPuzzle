@@ -12,9 +12,11 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
     private SpriteRenderer spriteRenderer;    // PostalItemのSpriteRenderer
 
     private SortingPoint sortingPoint;
-    public PostalItemManager postalItemManager;
+    private PostalItemManager postalItemManager;
 
     public TextMeshProUGUI addressText;
+
+    public bool isScored = false;
 
     private void Awake()
     {
@@ -92,13 +94,12 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
             {
                 if (address.Contains(sortingBox.GetValidAddress())) // SortingBoxの住所とPostalItemの住所が部分一致する場合
                 {
-                    sortingPoint.AddScore(1); // スコアを加算
+                    sortingPoint.AddScore(this,1); // スコアを加算
                 }
                 else
                 {
                     sortingPoint.AddMiss(1); // ミス回数を加算
                 }
-                //Destroy(this.gameObject);    // PostalItemを削除
                 return true; // PostalItemがドロップされた位置にSortingBoxがある場合
             }
         }

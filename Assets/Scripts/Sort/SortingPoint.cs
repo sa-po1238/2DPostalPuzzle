@@ -17,7 +17,7 @@ public class SortingPoint : MonoBehaviour
         sortingScore = 0;
         sortingMiss = 0;
         sortingScoreText.text = "Score: " + sortingScore;
-        postalItemManager = FindObjectOfType<PostalItemManager>();
+        //postalItemManager = FindObjectOfType<PostalItemManager>();
     }
 
     // Update is called once per frame
@@ -26,11 +26,15 @@ public class SortingPoint : MonoBehaviour
         
     }
 
-    public void AddScore(int score)
+    public void AddScore(PostalItem item, int score)
     {
-        sortingScore += score;
-        Debug.Log("Score: " + sortingScore);
-        sortingScoreText.text = "Score: " + sortingScore;
+        if (!item.isScored)
+        {
+            sortingScore += score;
+            Debug.Log("Score: " + sortingScore);
+            sortingScoreText.text = "Score: " + sortingScore;
+            item.isScored = true;
+        }   
     }
 
     public void AddMiss(int miss)

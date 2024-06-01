@@ -6,12 +6,12 @@ using TMPro;
 
 public class SortManager : MonoBehaviour
 {
-    float countTime = 0;
+    private float countTime = 0;
+    private float gameHour = 0;
     public TextMeshProUGUI countTimeText;
     public Button startButton;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Time.timeScale = 0f;    // 停止
 
@@ -22,7 +22,8 @@ public class SortManager : MonoBehaviour
     void Update()
     {
         countTime += Time.deltaTime;
-        countTimeText.text = countTime.ToString("F2");
+        gameHour = (countTime / 60);
+        countTimeText.text = gameHour.ToString("F2");
     }
 
     public void StartGame()
