@@ -12,13 +12,17 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
     private SpriteRenderer spriteRenderer;    // PostalItemのSpriteRenderer
 
     private SortingPoint sortingPoint;
+    private PostalItemManager postalItemManager;
 
     public TextMeshProUGUI addressText;
+
+    public bool isScored = false;
 
     private void Awake()
     {
         initialPosition = transform.position;   // PostalItemの初期位置を記憶
         sortingPoint = FindObjectOfType<SortingPoint>();    // SortingPointを取得
+        postalItemManager = FindObjectOfType<PostalItemManager>();    // PostalItemManagerを取得
         spriteRenderer = GetComponent<SpriteRenderer>();   // PostalItemのSpriteRendererを取得
     }
 
@@ -36,10 +40,44 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (IsDroppedInValidBox() == false) // ドロップ先の箱が正しくない場合
+        if (IsDroppedEnlargementSpace() == true)
         {
-            transform.position = initialPosition;   // PostalItemを初期位置に戻す
+            addressText.enabled = true;
         }
+        else
+        {
+            addressText.enabled = false;
+        }
+
+        if (IsDroppedInValidBox() == true)
+        {
+            Destroy(this.gameObject);    // PostalItemを削除
+            postalItemManager.SpawnPostalItem(); // PostalItemを生成
+        }
+
+        if (IsDroppedEnlargementSpace() == false && IsDroppedInValidBox() == false)
+        {
+            transform.position = initialPosition;    // PostalItemを初期位置に戻す
+        }
+
+    }
+
+    /* PostalItemがドロップされた位置にEnlargementSpaceがあるかチェック */
+    private bool IsDroppedEnlargementSpace()
+    {
+        // PostalItemがドロップされた位置にあるオブジェクトを取得
+        Collider2D[] colliders = Physics2D.OverlapPointAll(transform.position);
+
+        // PostalItemがドロップされた位置にあるオブジェクトがEnlargementSpaceであるかチェック
+        foreach (Collider2D collider in colliders)
+        {
+            // タグがEnlargementSpaceのオブジェクトがある場合
+            if (collider.tag == "EnlargementSpace")
+            {
+                return true; // PostalItemがドロップされた位置にEnlargementSpaceがある場合
+            }
+        }
+        return false; // PostalItemがドロップされた位置にEnlargementSpaceがない場合
     }
 
     /* PostalItemがドロップされた位置にSortingBoxがあるかチェック */  
@@ -56,13 +94,12 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
             {
                 if (address.Contains(sortingBox.GetValidAddress())) // SortingBoxの住所とPostalItemの住所が部分一致する場合
                 {
-                    sortingPoint.AddScore(1); // スコアを加算
+                    sortingPoint.AddScore(this,1); // スコアを加算
                 }
                 else
                 {
                     sortingPoint.AddMiss(1); // ミス回数を加算
                 }
-                Destroy(this.gameObject);
                 return true; // PostalItemがドロップされた位置にSortingBoxがある場合
             }
         }

@@ -18,6 +18,7 @@ public class PostalItemManager : MonoBehaviour
 
     public void Start()
     {
+        Debug.Log("PostalItemManager Start");
         SpawnPostalItem();
     }
 
