@@ -112,8 +112,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4788915786062803611}
   - component: {fileID: 2559700685430087719}
-  - component: {fileID: 5284086336403449693}
   - component: {fileID: 99596514590656205}
+  - component: {fileID: 8581547890683950096}
   m_Layer: 0
   m_Name: SrtBox
   m_TagString: Untagged
@@ -189,20 +189,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5284086336403449693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5235024337706306565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 632e37d000d834b4192602f86a7a44e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  validAddress: Persimmon
-  sortingBoxNameText: {fileID: 3496878480279012175}
 --- !u!61 &99596514590656205
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -239,7 +225,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.066}
+    oldSize: {x: 2.5, y: 2.665}
     newSize: {x: 5, y: 5.33}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -248,6 +234,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.066}
   m_EdgeRadius: 0
+--- !u!114 &8581547890683950096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5235024337706306565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fbee67b7eba16a40b276d93e905e894, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  validAddress: Persimmon
+  sortingBoxNameText: {fileID: 3496878480279012175}
 --- !u!1 &5287862917862371192
 GameObject:
   m_ObjectHideFlags: 0

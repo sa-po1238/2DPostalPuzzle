@@ -12,6 +12,7 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
     private SpriteRenderer spriteRenderer;    // PostalItemのSpriteRenderer
 
     private SortingPoint sortingPoint;
+    public PostalItemManager postalItemManager;
 
     public TextMeshProUGUI addressText;
 
@@ -19,6 +20,7 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         initialPosition = transform.position;   // PostalItemの初期位置を記憶
         sortingPoint = FindObjectOfType<SortingPoint>();    // SortingPointを取得
+        postalItemManager = FindObjectOfType<PostalItemManager>();    // PostalItemManagerを取得
         spriteRenderer = GetComponent<SpriteRenderer>();   // PostalItemのSpriteRendererを取得
     }
 
@@ -36,6 +38,21 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (IsDroppedEnlargementSpace() == true)
+        {
+            addressText.enabled = true;
+        }
+        else
+        {
+            addressText.enabled = false;
+        }
+
+        if (IsDroppedInValidBox() == true)
+        {
+            Destroy(this.gameObject);    // PostalItemを削除
+            postalItemManager.SpawnPostalItem(); // PostalItemを生成
+        }
+
         if (IsDroppedEnlargementSpace() == false && IsDroppedInValidBox() == false)
         {
             transform.position = initialPosition;    // PostalItemを初期位置に戻す
@@ -55,8 +72,6 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
             // タグがEnlargementSpaceのオブジェクトがある場合
             if (collider.tag == "EnlargementSpace")
             {
-                Debug.Log("PostalItem is dropped in EnlargementSpace");
-                
                 return true; // PostalItemがドロップされた位置にEnlargementSpaceがある場合
             }
         }
@@ -83,7 +98,7 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
                 {
                     sortingPoint.AddMiss(1); // ミス回数を加算
                 }
-                Destroy(this.gameObject);    // PostalItemを削除
+                //Destroy(this.gameObject);    // PostalItemを削除
                 return true; // PostalItemがドロップされた位置にSortingBoxがある場合
             }
         }
