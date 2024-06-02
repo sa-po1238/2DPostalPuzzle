@@ -43,8 +43,8 @@ public class DraggableItem : MonoBehaviour, IDragHandler, IEndDragHandler
         {
             // PostalItemの子要素のRectTransformからセル座標を取得
             Vector2Int cell = new Vector2Int(
-                Mathf.RoundToInt(child.localPosition.x / gridManager.cellSize),
-                Mathf.RoundToInt(child.localPosition.y / gridManager.cellSize)
+                Mathf.RoundToInt(child.localPosition.x / gridManager.GetCellSize()),
+                Mathf.RoundToInt(child.localPosition.y / gridManager.GetCellSize())
             );
             cells.Add(cell);
         }
