@@ -64,9 +64,9 @@ public class Data : MonoBehaviour
     // 残金のセット
     public void SetMoney(int money)
     {
-        PlayerPrefs.GetInt("Money", money);
-        money +=
-        PlayerPrefs.SetInt("Money", money);
+        int currentMoney = PlayerPrefs.GetInt("Money");
+        currentMoney += money;
+        PlayerPrefs.SetInt("Money", currentMoney);
     }
 
     // 残金の取得

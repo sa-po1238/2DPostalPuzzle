@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    public int rows = 10;
-    public int columns = 10;
-    public float cellSize = 1.0f;
-    public GameObject cellPrefab;
+    [SerializeField] int rows = 10;
+    [SerializeField] int columns = 10;
+    [SerializeField] float cellSize = 1.0f;
+    [SerializeField] GameObject cellPrefab;
 
     private Cell[,] grid;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         grid = new Cell[rows, columns];
+    }
+
+    void Start()
+    {
         CreateGrid();
     }
 
@@ -25,15 +28,26 @@ public class GridManager : MonoBehaviour
         {
             for (int x = 0; x < columns; x++)
             {
-                Vector3 cellPosition = new Vector3(x * cellSize, y * cellSize, 0);
-                GameObject cellObject = Instantiate(cellPrefab, cellPosition, Quaternion.identity);
-                cellObject.transform.SetParent(transform);  // GridManagerの子要素にする
-                cellObject.transform.localPosition = cellPosition;  // 親のローカル座標系における位置を設定
-                cellObject.transform.localScale = Vector3.one;  // スケールをリセット
-                grid[x, y] = cellObject.GetComponent<Cell>();  // Cellコンポーネントを取得
-                grid[x, y].Initialize(x, y);  // セルの初期化
+                CreateCell(x, y);
             }
         }
+    }
+
+    private void CreateCell(int x, int y)
+    {
+        Vector3 cellPosition = new Vector3(x * cellSize, y * cellSize, 0);
+        GameObject cellObject = Instantiate(cellPrefab, cellPosition, Quaternion.identity);
+        cellObject.transform.SetParent(transform);  // GridManagerの子要素にする
+        cellObject.transform.localPosition = cellPosition;  // 親のローカル座標系における位置を設定
+        cellObject.transform.localScale = Vector3.one;  // スケールをリセット
+        Cell cellComponent = cellObject.GetComponent<Cell>();  // Cellコンポーネントを取得
+        if (cellComponent == null)
+        {
+            Debug.LogError("Cellコンポーネントがアタッチされていません");
+            return;
+        }
+        grid[x, y] = cellComponent;  // グリッドにセルを格納
+        grid[x, y].Initialize(x, y);  // セルの初期化
     }
 
     /* PostalItemが置けるかどうか */
@@ -41,7 +55,7 @@ public class GridManager : MonoBehaviour
     {
         foreach (Vector2Int cell in itemCells)
         {
-            if (cell.x < 0 || cell.x >= columns || cell.y < 0 || cell.y >= rows || grid[cell.x, cell.y].isOccupied)
+            if (!IsCellValid(cell) || grid[cell.x, cell.y].isOccupied)
             {
                 return false;   // PostalItemが範囲外にあるか、すでに別のPostalItemが置かれている場合は置けない
             }
@@ -49,12 +63,30 @@ public class GridManager : MonoBehaviour
         return true;
     }
 
+    private bool IsCellValid(Vector2Int cell)
+    {
+        return cell.x >= 0 && cell.x < columns && cell.y >= 0 && cell.y < rows;
+    }
+
     /* PostalItemを置く */
     public void PlaceItem(Vector2Int[] itemCells)
     {
         foreach (Vector2Int cell in itemCells)
         {
-            grid[cell.x, cell.y].isOccupied = true;   // PostalItemが置かれたセルを占有状態にする
+            if (IsCellValid(cell))
+            {
+                grid[cell.x, cell.y].isOccupied = true;  // PostalItemが置かれたセルを占有状態にする
+            }
+            else
+            {
+                Debug.LogError("PostalItemが範囲外に置かれました");
+            }
         }
+    }
+
+    /* cellSizeのゲッターメソッド */
+    public float GetCellSize()
+    {
+        return cellSize;
     }
 }

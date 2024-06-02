@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class StackArea : MonoBehaviour
 {
-    public RectTransform loadingArea; // 積載スペースを表すRectTransform
+    [SerializeField] private RectTransform loadingArea; // 積載スペースを表すRectTransform
     private List<PostalItem> loadedItems = new List<PostalItem>(); // 積み込まれたアイテムのリスト
 
+    /*
     public bool TryLoadItem(PostalItem item)    // アイテムを積み込む
     {
         RectTransform itemRectTransform = item.GetComponent<RectTransform>();   // アイテムのRectTransformを取得
@@ -22,13 +23,43 @@ public class StackArea : MonoBehaviour
         }
         return false;
     }
+    */
+
+    public bool TryLoadItem(PostalItem item)    // アイテムを積み込む
+    {
+        Rect itemRect = GetRect(item.GetComponent<RectTransform>());
+        Rect loadingRect = GetRect(loadingArea);
+
+        if (IsWithinLoadingArea(itemRect, loadingRect) && !IsOverlappingWithOtherItems(itemRect))
+        {
+            LoadItem(item);
+            return true;
+        }
+        return false;
+    }
+
+    private Rect GetRect(RectTransform rectTransform)
+    {
+        return new Rect(rectTransform.anchoredPosition, rectTransform.sizeDelta);
+    }
+
+    private bool IsWithinLoadingArea(Rect itemRect, Rect loadingRect)
+    {
+        return loadingRect.Overlaps(itemRect);
+    }
+
+    private void LoadItem(PostalItem item)
+    {
+        loadedItems.Add(item);
+        item.transform.SetParent(loadingArea.transform);
+    }
+
 
     private bool IsOverlappingWithOtherItems(Rect itemRect)  // 他の荷物と重なっているかチェック
     {
         foreach (PostalItem loadedItem in loadedItems)  // 積み込まれたアイテムをチェック
         {
-            RectTransform loadedItemRectTransform = loadedItem.GetComponent<RectTransform>();   // 積み込まれたアイテムのRectTransformを取得
-            Rect loadedItemRect = new Rect(loadedItemRectTransform.anchoredPosition, loadedItemRectTransform.sizeDelta);    // 積み込まれたアイテムの矩形を取得
+            Rect loadedItemRect = GetRect(loadedItem.GetComponent<RectTransform>());
 
             if (loadedItemRect.Overlaps(itemRect))  // 他の荷物と重なっているかチェック
             {
