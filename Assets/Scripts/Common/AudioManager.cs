@@ -34,7 +34,7 @@ public class AudioManager : MonoBehaviour
         CheckOverlap(this.audioData.BGM_Data, "BGM_Data");
     }
 
-    //オーディオIDが重複していないかを確認する
+    // オーディオIDが重複していないかを確認する
     private void CheckOverlap(List<Datum> data, string variable_name)
     {
         List<int> vs = new List<int>();
@@ -51,7 +51,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    //オーディオIDをindexに変換する
+    // オーディオIDをindexに変換する
     public int ConvertIdIntoIndex(List<Datum> data, int id)
     {
         for (int index = 0; index < data.Count; index++)
@@ -96,6 +96,7 @@ public class AudioManager : MonoBehaviour
         this.BGMSource.clip = this.audioData.BGM_Data[index].clip;
         this.BGMSource.volume = this.audioData.BGM_Data[index].volume;
         this.BGMSource.Play();
+        Debug.Log("BGMを再生しました");
     }
 
     public void StopBGM()

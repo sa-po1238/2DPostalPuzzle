@@ -26,6 +26,7 @@ public class Data : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        AudioManager.instance_AudioManager.PlayBGM(0);
         
     }
 
