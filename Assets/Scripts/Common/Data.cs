@@ -4,6 +4,25 @@ using UnityEngine;
 
 public class Data : MonoBehaviour
 {
+    public static Data instance_Data;
+
+    void Awake()
+    {
+        CheckInstancce();
+    }
+
+    private void CheckInstancce()
+    {
+        if (instance_Data == null)
+        {
+            instance_Data = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,12 +36,13 @@ public class Data : MonoBehaviour
     }
 
     // データの初期化
-    private void SetData()
+    public void SetData()
     {
         PlayerPrefs.SetInt("Day", 1);
         PlayerPrefs.SetInt("Score", 0);
         PlayerPrefs.SetInt("Miss", 0);
         PlayerPrefs.SetInt("Money", 0);
+        Debug.Log("データを初期化しました");
     }
 
     // 日にちのセット
