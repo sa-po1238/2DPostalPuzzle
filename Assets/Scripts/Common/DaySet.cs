@@ -11,6 +11,7 @@ public class DaySet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Data.instance_Data.SetDay(1);   // テスト用
         dayCountText.text = "Day " + Data.instance_Data.GetDay().ToString();
     }
 

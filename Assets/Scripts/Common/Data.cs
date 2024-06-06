@@ -27,7 +27,6 @@ public class Data : MonoBehaviour
     void Start()
     {
         AudioManager.instance_AudioManager.PlayBGM(0);
-        
     }
 
     // Update is called once per frame
@@ -39,7 +38,8 @@ public class Data : MonoBehaviour
     // データの初期化
     public void SetData()
     {
-        PlayerPrefs.SetInt("Day", 1);
+        PlayerPrefs.SetInt("Day", 0);
+        PlayerPrefs.SetInt("Quota", 0);
         PlayerPrefs.SetInt("Score", 0);
         PlayerPrefs.SetInt("Miss", 0);
         PlayerPrefs.SetInt("Money", 0);
@@ -56,6 +56,18 @@ public class Data : MonoBehaviour
     public int GetDay()
     {
         return PlayerPrefs.GetInt("Day");
+    }
+
+    // ノルマのセット
+    public void GetQuota(int quota)
+    {
+        PlayerPrefs.SetIn("Quota", quota);
+    }
+
+    // ノルマの取得
+    public int GetQuota()
+    {
+        return PlayerPrefs.GetInt("Quota");
     }
 
     // スコアのセット
