@@ -16,5 +16,5 @@ MonoBehaviour:
   BGM_Data:
   - id: 0
     clip: {fileID: 8300000, guid: 52bf56de9be58774fbcd541c9f5208f3, type: 3}
-    volume: 0
+    volume: 1
     memo: 
