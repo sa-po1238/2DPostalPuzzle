@@ -61,7 +61,7 @@ public class Data : MonoBehaviour
     // ノルマのセット
     public void GetQuota(int quota)
     {
-        PlayerPrefs.SetIn("Quota", quota);
+        PlayerPrefs.SetInt("Quota", quota);
     }
 
     // ノルマの取得

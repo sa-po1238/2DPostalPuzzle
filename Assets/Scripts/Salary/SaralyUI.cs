@@ -13,7 +13,7 @@ public class SaralyUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        SetSaraly();
     }
 
     // Update is called once per frame
@@ -24,10 +24,17 @@ public class SaralyUI : MonoBehaviour
 
     private void SetSaraly()
     {
-        quotaText.text = "今日のノルマ " + Data.instance_Data.GetQuota().ToString() + "個";
-        scoreText.text = "配送した荷物の数 " + Data.instance_Data.GetScore().ToString() + "個";
-        saralyText.text = "給料 " + Data.instance_Data.GetSaraly().ToString() + "円";
+        quotaText.text = Data.instance_Data.GetQuota().ToString() + "個";
+        scoreText.text = Data.instance_Data.GetScore().ToString() + "個";
+        saralyText.text = CaluculateSaraly() + "円";
     }
 
-    public void 
+    private int CaluculateSaraly()
+    {
+        int saraly = Data.instance_Data.GetScore();
+        int miss = Data.instance_Data.GetMiss();
+        saraly = saraly * 100 - miss * 50;
+        Data.instance_Data.SetMoney(saraly);
+        return saraly;
+    }
 }
