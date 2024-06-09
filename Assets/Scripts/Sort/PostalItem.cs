@@ -16,7 +16,7 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public TextMeshProUGUI addressText;
 
-    public bool isScored = false;
+    public bool isScored = false;   // PostalItemが多重にスコアを加算しないようにするフラグ
 
     private void Awake()
     {
@@ -40,6 +40,7 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        // PostalItemがドロップされた位置にEnlargementSpaceがある場合
         if (IsDroppedEnlargementSpace() == true)
         {
             addressText.enabled = true;
@@ -49,6 +50,7 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
             addressText.enabled = false;
         }
 
+        // PostalItemが正しい箱にドロップされた場合
         if (IsDroppedInValidBox() == true)
         {
             Destroy(this.gameObject);    // PostalItemを削除
@@ -65,19 +67,20 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
     /* PostalItemがドロップされた位置にEnlargementSpaceがあるかチェック */
     private bool IsDroppedEnlargementSpace()
     {
-        // PostalItemがドロップされた位置にあるオブジェクトを取得
+        // ドロップされた位置にあるオブジェクトを取得
         Collider2D[] colliders = Physics2D.OverlapPointAll(transform.position);
 
-        // PostalItemがドロップされた位置にあるオブジェクトがEnlargementSpaceであるかチェック
+        // ドロップされた位置にあるオブジェクトがEnlargementSpaceであるかチェック
         foreach (Collider2D collider in colliders)
         {
-            // タグがEnlargementSpaceのオブジェクトがある場合
+            // EnlargementSpaceがある場合
             if (collider.tag == "EnlargementSpace")
             {
-                return true; // PostalItemがドロップされた位置にEnlargementSpaceがある場合
+                return true;
             }
         }
-        return false; // PostalItemがドロップされた位置にEnlargementSpaceがない場合
+        // EnlargementSpaceがない場合
+        return false;
     }
 
     /* PostalItemがドロップされた位置にSortingBoxがあるかチェック */  
@@ -98,12 +101,12 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
                 }
                 else
                 {
-                    sortingPoint.AddMiss(1); // ミス回数を加算
+                    sortingPoint.AddMiss(this,1); // ミス回数を加算
                 }
-                return true; // PostalItemがドロップされた位置にSortingBoxがある場合
+                return true; // SortingBoxがある場合
             }
         }
-        return false; // PostalItemがドロップされた位置にSortingBoxがない場合
+        return false; // SortingBoxがない場合
     }
     
 }

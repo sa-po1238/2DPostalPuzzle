@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PostalItemManager : MonoBehaviour
 {
-    public int postalItemCount = 3;
+    public int postalItemCount;
     public GameObject postalItemPrefab;
     public Transform spawnPoint;
+
+    private SortingPoint sortingPoint;
 
     private string[] cityNames = new string[]
     {
@@ -19,12 +21,15 @@ public class PostalItemManager : MonoBehaviour
     public void Start()
     {
         Debug.Log("PostalItemManager Start");
+        sortingPoint = FindObjectOfType<SortingPoint>();
+        sortingPoint.AddRemaining(postalItemCount);
         SpawnPostalItem();
     }
 
     public void SpawnPostalItem()
     {
         postalItemCount--;  // PostalItemの残り数を減らす
+        sortingPoint.AddRemaining(postalItemCount);    // 残りPostalItem数を表示
         if (postalItemCount < 0)    // PostalItemがすべて生成された場合
         {
             return;
