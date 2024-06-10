@@ -11,8 +11,6 @@ public class SortingPoint : MonoBehaviour
     [SerializeField] TextMeshProUGUI sortingMissText;
     [SerializeField] TextMeshProUGUI remainingText;
 
-    private PostalItemManager postalItemManager;
-
     // Start is called before the first frame update
     void Start()
     {

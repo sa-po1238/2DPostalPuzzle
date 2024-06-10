@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class SortManager : MonoBehaviour
 {
     private float countTime = 0;
     private float gameHour = 0;
     public TextMeshProUGUI countTimeText;
-    public Button startButton;
+    [SerializeField] Button startButton;
+    [SerializeField] Button finishButton;
 
     void Awake()
     {
@@ -37,7 +39,11 @@ public class SortManager : MonoBehaviour
     {
         Time.timeScale = 0f;    // 停止
 
+        finishButton.gameObject.SetActive(true);    // 終了ボタン表示
+    }
 
-        
+    public void SceneToSaraly()
+    {
+        SceneManager.LoadScene("SalaryPart");
     }
 }
