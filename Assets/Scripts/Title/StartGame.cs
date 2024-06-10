@@ -27,7 +27,7 @@ public class StartGame : MonoBehaviour
             Data.instance_Data.SetData();
         }
 
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("SortPart");
     }
 
     private bool IsFirstPlay()

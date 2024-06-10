@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: a044f43baa9ae3448bdfca0c69767396
+  - enabled: 1
+    path: Assets/Scenes/SortPart.unity
+    guid: a1ee53b198bd24d489135565034f6e55
+  - enabled: 1
+    path: Assets/Scenes/SalaryPart.unity
+    guid: fb715c7a6da45fc4e9af2df14cf2878c
   m_configObjects: {}
