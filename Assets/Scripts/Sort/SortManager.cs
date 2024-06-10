@@ -32,4 +32,12 @@ public class SortManager : MonoBehaviour
 
         startButton.gameObject.SetActive(false);    // スタートボタン非表示
     }
+
+    public void StopGame()
+    {
+        Time.timeScale = 0f;    // 停止
+
+
+        
+    }
 }
