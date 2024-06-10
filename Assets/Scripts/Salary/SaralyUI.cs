@@ -24,7 +24,8 @@ public class SaralyUI : MonoBehaviour
 
     private void SetSaraly()
     {
-        quotaText.text = Data.instance_Data.GetQuota().ToString() + "個";
+        quotaText.text = "10個";
+        //quotaText.text = Data.instance_Data.GetQuota().ToString() + "個";
         scoreText.text = Data.instance_Data.GetScore().ToString() + "個";
         saralyText.text = CaluculateSaraly() + "円";
     }

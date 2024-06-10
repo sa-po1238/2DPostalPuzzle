@@ -32,6 +32,8 @@ public class SortingPoint : MonoBehaviour
             Debug.Log("Score: " + sortingScore);
             sortingScoreText.text = "Score: " + sortingScore;
             item.isScored = true;
+
+            Data.instance_Data.SetScore(sortingScore);   // スコアをDataに保存
         }
     }
 
@@ -43,6 +45,8 @@ public class SortingPoint : MonoBehaviour
             Debug.Log("Miss: " + sortingMiss);
             sortingMissText.text = "Miss: " + sortingMiss;
             item.isScored = true;
+
+            Data.instance_Data.SetMiss(sortingMiss); // ミス回数をDataに保存
         }
     }
 
