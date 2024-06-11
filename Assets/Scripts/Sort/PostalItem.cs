@@ -17,6 +17,7 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
     private Vector3 lastPosition; // PostalItemの最後の位置
     private SortingPoint sortingPoint;
     private PostalItemManager postalItemManager;
+
     private TextMeshProUGUI toAddressText;
     private TextMeshProUGUI fromAddressText;
     private TextMeshProUGUI toPersonNameText;
@@ -25,13 +26,13 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
     private TextMeshProUGUI itemWeightText;
 
     public bool isScored = false; // PostalItemが多重にスコアを加算しないようにするフラグ
+    private bool isShown = false;    //labelが表示されているかどうか
 
     private void Awake()
     {
         lastPosition = transform.position; // PostalItemの初期位置を記憶
         sortingPoint = FindObjectOfType<SortingPoint>();
         postalItemManager = FindObjectOfType<PostalItemManager>();
-
         InitializeTextFields();
     }
 
@@ -100,6 +101,8 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private bool IsDroppedEnlargementSpace()
     {
+        postalItemManager.SetActiveLabel();
+
         Collider2D[] colliders = Physics2D.OverlapPointAll(transform.position);
 
         foreach (Collider2D collider in colliders)
