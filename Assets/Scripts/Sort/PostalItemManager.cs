@@ -19,7 +19,7 @@ public class PostalItemManager : MonoBehaviour
         "Papaya Bl"
     };
 
-    public void Start()
+    private void Start()
     {
         Debug.Log("PostalItemManager Start");
         sortingPoint = FindObjectOfType<SortingPoint>();
@@ -30,35 +30,74 @@ public class PostalItemManager : MonoBehaviour
 
     public void SpawnPostalItem()
     {
-        postalItemCount--;  // PostalItemの残り数を減らす
-        if (postalItemCount < 0)    // PostalItemがすべて生成された場合
+        postalItemCount--;
+        if (postalItemCount < 0)
         {
             sortManager.StopGame(); // ゲーム終了
             return;
         }
-        sortingPoint.AddRemaining(postalItemCount);    // 残りPostalItem数を表示
 
-        GameObject newPostalItem = Instantiate(postalItemPrefab, spawnPoint.position, Quaternion.identity); // PostalItemを生成
+        sortingPoint.AddRemaining(postalItemCount);
+
+        GameObject newPostalItem = Instantiate(postalItemPrefab, spawnPoint.position, Quaternion.identity);
         Debug.Log("PostalItem Spawned");
-        PostalItem postalItem = newPostalItem.GetComponent<PostalItem>();   // PostalItemコンポーネントを取得
+        PostalItem postalItem = newPostalItem.GetComponent<PostalItem>();
 
-        string address = GetRandomAddress();
-        Debug.Log("ToAddress: " + address);
-        postalItem.toAddress = address;   // 住所を設定
-
-        address = GetRandomAddress();
-        Debug.Log("FromAddress: " + address);
-        postalItem.fromAddress = address; // 住所を設定
+        postalItem.toAddress = GetRandomAddress();
+        postalItem.fromAddress = GetRandomAddress();
+        postalItem.toPersonName = GetRandomPersonName();
+        postalItem.fromPersonName = GetRandomPersonName();
+        postalItem.itemName = GetRandomItemName();
+        postalItem.itemWeight = GetRandomItemWeight();
     }
 
-    /* アドレス作成 */
     private string GetRandomAddress()
     {
         int addressNum = Random.Range(0, 1000);
-        int randomNum = Random.Range(0, cityNames.Length);
-        string cityName = cityNames[randomNum];
-        
-        string address = addressNum + " " + cityName;
-        return address;
+        string cityName = cityNames[Random.Range(0, cityNames.Length)];
+        return addressNum + " " + cityName;
+    }
+
+    private string GetRandomPersonName()
+    {
+        string[] firstNames = new string[]
+        {
+            "Alice", "Bob", "Charlie", "David", "Eve", "Frank",
+            "Grace", "Heidi", "Ivan", "Judy", "Kevin", "Linda",
+            "Mallory", "Nancy", "Oscar", "Peggy", "Quentin", "Randy",
+            "Steve", "Trent", "Ursula", "Victor", "Wendy", "Xander",
+            "Yvonne", "Zelda"
+        };
+
+        string[] lastNames = new string[]
+        {
+            "Smith", "Johnson", "Williams", "Jones", "Brown",
+            "Davis", "Miller", "Wilson", "Moore", "Taylor",
+            "Anderson", "Thomas", "Jackson", "White", "Harris",
+            "Martin", "Thompson", "Garcia", "Martinez", "Robinson",
+            "Clark", "Rodriguez", "Lewis", "Lee", "Walker"
+        };
+
+        string firstName = firstNames[Random.Range(0, firstNames.Length)];
+        string lastName = lastNames[Random.Range(0, lastNames.Length)];
+        return firstName + " " + lastName;
+    }
+
+    private string GetRandomItemName()
+    {
+        string[] itemNames = new string[]
+        {
+            "Laptop", "Books", "Clothes", "Shoes", "Toys",
+            "Fruits", "Vegetables", "Sporting Goods", "Home Decor",
+            "Electronics", "Groceries"
+        };
+
+        return itemNames[Random.Range(0, itemNames.Length)];
+    }
+
+    private string GetRandomItemWeight()
+    {
+        float randomWeight = Random.Range(0.1f, 10.0f);
+        return randomWeight.ToString("F1") + "kg";
     }
 }
