@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d365eacb25d88b43bde573d0815a505, type: 3}
   m_Name: AudioData
   m_EditorClassIdentifier: 
-  SE_Data: []
+  SE_Data:
+  - id: 0
+    clip: {fileID: 8300000, guid: e6a8122992d32b64aa45c40b54dcef7b, type: 3}
+    volume: 1
+    memo: 
   BGM_Data:
   - id: 0
     clip: {fileID: 8300000, guid: 52bf56de9be58774fbcd541c9f5208f3, type: 3}

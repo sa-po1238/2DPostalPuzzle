@@ -11,6 +11,7 @@ public class SortManager : MonoBehaviour
     private float gameHour = 0;
     public TextMeshProUGUI countTimeText;
     [SerializeField] Button startButton;
+    [SerializeField] Image Blur;
     [SerializeField] Button finishButton;
 
     void Awake()
@@ -33,6 +34,7 @@ public class SortManager : MonoBehaviour
         Time.timeScale = 1f;    // 再生
 
         startButton.gameObject.SetActive(false);    // スタートボタン非表示
+        Blur.gameObject.SetActive(false);    // ブラー非表示
     }
 
     public void StopGame()
