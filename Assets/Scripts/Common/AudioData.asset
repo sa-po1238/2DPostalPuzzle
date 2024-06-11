@@ -14,7 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SE_Data:
   - id: 0
-    clip: {fileID: 8300000, guid: e6a8122992d32b64aa45c40b54dcef7b, type: 3}
+    clip: {fileID: 8300000, guid: 9865bd94a033e324fad8b8a8b202f0bf, type: 3}
+    volume: 1
+    memo: 
+  - id: 1
+    clip: {fileID: 8300000, guid: 1c750386d95b9c841ad83ae221b8eea9, type: 3}
+    volume: 1
+    memo: 
+  - id: 2
+    clip: {fileID: 8300000, guid: da52e2f9769f3aa4498ee81197c1d906, type: 3}
     volume: 1
     memo: 
   BGM_Data:

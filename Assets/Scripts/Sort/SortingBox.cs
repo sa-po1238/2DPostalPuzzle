@@ -41,6 +41,8 @@ public class SortingBox : MonoBehaviour, IPointerClickHandler
 
     private void OpenBox()
     {
+        AudioManager.instance_AudioManager.PlaySE(1); // ボックスが開く音を再生
+        
         boxOpenImage.enabled = true;
         boxCloseImage.enabled = false;
 
@@ -49,6 +51,8 @@ public class SortingBox : MonoBehaviour, IPointerClickHandler
 
     public void CloseBox()
     {
+        AudioManager.instance_AudioManager.PlaySE(2);
+
         boxOpenImage.enabled = false;
         boxCloseImage.enabled = true;
 

@@ -26,11 +26,13 @@ public class Binder : MonoBehaviour, IPointerClickHandler
         Debug.Log("Clicked");
         if (isClicked)
         {
+            AudioManager.instance_AudioManager.PlaySE(0);
             this.transform.DOMoveY(defaultPosition.y, 0.5f);
             isClicked = false;
         }
         else
         {
+            AudioManager.instance_AudioManager.PlaySE(0);
             this.transform.DOMoveY(100, 0.5f);
             isClicked = true;
         }

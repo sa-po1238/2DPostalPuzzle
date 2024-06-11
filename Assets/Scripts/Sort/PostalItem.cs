@@ -116,6 +116,7 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
                 {
                     sortingPoint.AddMiss(this,1); // ミス回数を加算
                 }
+                Debug.Log("PostalItem Dropped in SortingBox");
                 return true; // SortingBoxがある場合
             }
         }
