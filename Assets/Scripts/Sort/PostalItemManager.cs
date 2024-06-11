@@ -43,8 +43,12 @@ public class PostalItemManager : MonoBehaviour
         PostalItem postalItem = newPostalItem.GetComponent<PostalItem>();   // PostalItemコンポーネントを取得
 
         string address = GetRandomAddress();
-        Debug.Log("Address: " + address);
-        postalItem.address = address;   // 住所を設定
+        Debug.Log("ToAddress: " + address);
+        postalItem.toAddress = address;   // 住所を設定
+
+        address = GetRandomAddress();
+        Debug.Log("FromAddress: " + address);
+        postalItem.fromAddress = address; // 住所を設定
     }
 
     /* アドレス作成 */
