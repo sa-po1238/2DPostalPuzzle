@@ -47,9 +47,9 @@ TagManager:
   - name: EnlargementSpace
     uniqueID: 3175116121
     locked: 0
-  - name: SrtItem
-    uniqueID: 613741023
-    locked: 0
   - name: SrtBox
     uniqueID: 3064448297
+    locked: 0
+  - name: SrtItem
+    uniqueID: 613741023
     locked: 0

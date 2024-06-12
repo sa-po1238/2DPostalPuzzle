@@ -36,7 +36,13 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
         sortingPoint = FindObjectOfType<SortingPoint>();
         postalItemManager = FindObjectOfType<PostalItemManager>();
         label = FindObjectOfType<Label>();
+        
+    }
+
+    private void Start()
+    {
         label.InitializeTextFields(toAddress, fromAddress, toPersonName, fromPersonName, itemName, itemWeight);
+        label.ToggleTextFields(false); // 初期状態では非表示
     }
 
     /*
@@ -95,8 +101,6 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private bool IsDroppedEnlargementSpace()
     {
-        //postalItemManager.SetActiveLabel();
-
         Collider2D[] colliders = Physics2D.OverlapPointAll(transform.position);
 
         foreach (Collider2D collider in colliders)

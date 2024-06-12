@@ -22,6 +22,7 @@ public class Label : MonoBehaviour
         fromPersonNameText.text = fromPersonName;
         itemNameText.text = itemName;
         itemWeightText.text = itemWeight;
+        Debug.Log(toAddress);
     }
 
     // テキストフィールドの表示/非表示を切り替えるメソッド
