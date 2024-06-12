@@ -12,18 +12,20 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
     public string fromPersonName; // 送り元名前
     public string itemName; // アイテム名
     public string itemWeight; // アイテム重量
-    public string itemSize; // アイテムサイズ
 
     private Vector3 lastPosition; // PostalItemの最後の位置
     private SortingPoint sortingPoint;
     private PostalItemManager postalItemManager;
+    private Label label;
 
+    /*
     private TextMeshProUGUI toAddressText;
     private TextMeshProUGUI fromAddressText;
     private TextMeshProUGUI toPersonNameText;
     private TextMeshProUGUI fromPersonNameText;
     private TextMeshProUGUI itemNameText;
     private TextMeshProUGUI itemWeightText;
+    */
 
     public bool isScored = false; // PostalItemが多重にスコアを加算しないようにするフラグ
     private bool isShown = false;    //labelが表示されているかどうか
@@ -33,20 +35,11 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
         lastPosition = transform.position; // PostalItemの初期位置を記憶
         sortingPoint = FindObjectOfType<SortingPoint>();
         postalItemManager = FindObjectOfType<PostalItemManager>();
-        InitializeTextFields();
+        label = FindObjectOfType<Label>();
+        label.InitializeTextFields(toAddress, fromAddress, toPersonName, fromPersonName, itemName, itemWeight);
     }
 
-    private void InitializeTextFields()
-    {
-        // テキストフィールドの参照を取得
-        toAddressText = GameObject.Find("ToAddressText").GetComponent<TextMeshProUGUI>();
-        fromAddressText = GameObject.Find("FromAddressText").GetComponent<TextMeshProUGUI>();
-        toPersonNameText = GameObject.Find("ToPersonNameText").GetComponent<TextMeshProUGUI>();
-        fromPersonNameText = GameObject.Find("FromPersonNameText").GetComponent<TextMeshProUGUI>();
-        itemNameText = GameObject.Find("ItemNameText").GetComponent<TextMeshProUGUI>();
-        itemWeightText = GameObject.Find("ItemWeightText").GetComponent<TextMeshProUGUI>();
-    }
-
+    /*
     void Start()
     {
         // PostalItemの情報を表示
@@ -73,6 +66,7 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
         itemNameText.enabled = isEnabled;
         itemWeightText.enabled = isEnabled;
     }
+    */
 
     public void OnDrag(PointerEventData eventData)
     {
@@ -85,7 +79,7 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
     {
         if (IsDroppedEnlargementSpace())
         {
-            ToggleTextFields(true);
+            label.ToggleTextFields(true);
         }
 
         if (IsDroppedInValidBox())
@@ -101,7 +95,7 @@ public class PostalItem : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private bool IsDroppedEnlargementSpace()
     {
-        postalItemManager.SetActiveLabel();
+        //postalItemManager.SetActiveLabel();
 
         Collider2D[] colliders = Physics2D.OverlapPointAll(transform.position);
 

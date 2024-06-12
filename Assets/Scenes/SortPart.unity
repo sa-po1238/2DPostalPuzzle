@@ -135,10 +135,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: label
       objectReference: {fileID: 0}
-    - target: {fileID: 2876347468338878495, guid: 9b64b49867b16c643be9798301903d51, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6163776941610108138, guid: 9b64b49867b16c643be9798301903d51, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1098,9 +1094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   postalItemCount: 10
   postalItemPrefab: {fileID: 3782403013142394931, guid: e73c4f404512728479ffe2855067abf5, type: 3}
-  labelPrefabs:
-  - {fileID: 1009752809}
-  - {fileID: 1685992951}
+  labelPrefabs: []
   spawnPoint: {fileID: 595482196}
 --- !u!1001 &915837903
 PrefabInstance:
@@ -1219,11 +1213,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfb740a416434e24ab06b9f63c94588f, type: 3}
---- !u!1 &1009752809 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2876347468338878495, guid: 9b64b49867b16c643be9798301903d51, type: 3}
-  m_PrefabInstance: {fileID: 65892180}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1029093182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2412,11 +2401,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550856474}
   m_CullTransparentMesh: 1
---- !u!1 &1685992951 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 927984312165071402, guid: c24dff3092baa8a4cb2be5e1e57e3633, type: 3}
-  m_PrefabInstance: {fileID: 2027715481}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1707217860
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2787,10 +2771,6 @@ PrefabInstance:
     - target: {fileID: 927984312165071402, guid: c24dff3092baa8a4cb2be5e1e57e3633, type: 3}
       propertyPath: m_Name
       value: label_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 927984312165071402, guid: c24dff3092baa8a4cb2be5e1e57e3633, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4996842839012964498, guid: c24dff3092baa8a4cb2be5e1e57e3633, type: 3}
       propertyPath: m_Pivot.x

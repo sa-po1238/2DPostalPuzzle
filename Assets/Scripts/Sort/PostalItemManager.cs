@@ -51,11 +51,13 @@ public class PostalItemManager : MonoBehaviour
         postalItem.itemName = GetRandomItemName();
         postalItem.itemWeight = GetRandomItemWeight();
 
+    /*
         // labelPrefabsをすべて非表示にする
         foreach (GameObject labelPrefab in labelPrefabs)
         {
             labelPrefab.SetActive(false);
         }
+    */
     }
 
     private string GetRandomAddress()
@@ -108,12 +110,14 @@ public class PostalItemManager : MonoBehaviour
         return randomWeight.ToString("F1") + "kg";
     }
 
+    /*
     public void SetActiveLabel()
     {
         AudioManager.instance_AudioManager.PlaySE(4);
 
-        int index = Random.Range(0, labelPrefabs.Length);
+        int index = Random.Range(0, labelPrefabs.Length-1);
         Debug.Log("SetActiveLabel: " + index);
         labelPrefabs[index].SetActive(true);
     }
+    */
 }

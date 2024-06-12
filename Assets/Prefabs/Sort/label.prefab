@@ -145,13 +145,14 @@ GameObject:
   - component: {fileID: 6163776941610108138}
   - component: {fileID: 6217177889825345198}
   - component: {fileID: 5255327731114355737}
+  - component: {fileID: 4804721728833357954}
   m_Layer: 5
   m_Name: label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6163776941610108138
 RectTransform:
   m_ObjectHideFlags: 0
@@ -217,6 +218,24 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4804721728833357954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2876347468338878495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8177712c6cf11746850aca2b35fd69e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toAddressText: {fileID: 178692302268114210}
+  fromAddressText: {fileID: 6020550512701809912}
+  toPersonNameText: {fileID: 4174750422892132198}
+  fromPersonNameText: {fileID: 2246725210537902777}
+  itemNameText: {fileID: 1279231860838774694}
+  itemWeightText: {fileID: 4601028419054280102}
 --- !u!1 &2990152986614291478
 GameObject:
   m_ObjectHideFlags: 0
