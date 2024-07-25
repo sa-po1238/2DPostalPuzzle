@@ -10,6 +10,8 @@ public class StartGame : MonoBehaviour
 
     public void StartGameButton()
     {
+        AudioManager.instance_AudioManager.PlaySE(3);
+
         if (IsFirstPlay())
         {
             Data.instance_Data.SetData();
