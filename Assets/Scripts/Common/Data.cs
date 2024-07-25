@@ -16,6 +16,7 @@ public class Data : MonoBehaviour
         if (instance_Data == null)
         {
             instance_Data = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
